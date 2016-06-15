@@ -1,0 +1,19 @@
+{
+  "name": "react-native-chart",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lumin824/react-native-chart.git"
+  },
+  "author": "lumin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lumin824/react-native-chart/issues"
+  },
+  "homepage": "https://github.com/lumin824/react-native-chart#readme"
+}
