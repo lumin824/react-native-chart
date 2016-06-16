@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Arrays;
 
-class ChartPackage implements ReactPackage {
+public class ChartPackage implements ReactPackage {
   @Override
   public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
       return Collections.emptyList();

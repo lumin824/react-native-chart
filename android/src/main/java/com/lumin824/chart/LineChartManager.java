@@ -1,13 +1,21 @@
 package com.lumin824.chart;
 
 import android.graphics.Color;
+import android.view.MotionEvent;
 
+import com.facebook.react.bridge.Callback;
+import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.common.MapBuilder;
+import com.facebook.react.common.SystemClock;
+import com.facebook.react.uimanager.UIManagerModule;
 import com.facebook.react.uimanager.annotations.ReactProp;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 
+import com.facebook.react.uimanager.events.EventDispatcher;
+import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
@@ -15,8 +23,13 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.listener.ChartTouchListener;
+import com.github.mikephil.charting.listener.OnChartGestureListener;
 
 import java.util.ArrayList;
+import java.util.Map;
+
+import javax.annotation.Nullable;
 
 public class LineChartManager extends SimpleViewManager<LineChart>{
 
@@ -26,8 +39,8 @@ public class LineChartManager extends SimpleViewManager<LineChart>{
   }
 
   @Override
-  protected LineChart createViewInstance(ThemedReactContext reactContext) {
-    LineChart chart = new LineChart(reactContext);
+  protected LineChart createViewInstance(final ThemedReactContext reactContext) {
+    final LineChart chart = new LineChart(reactContext);
 
     XAxis xAxis = chart.getXAxis();
     xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -54,6 +67,54 @@ public class LineChartManager extends SimpleViewManager<LineChart>{
 
 
     return chart;
+  }
+
+  @Override
+  protected void addEventEmitters(final ThemedReactContext reactContext, final LineChart chart) {
+
+    chart.setOnChartGestureListener(new OnChartGestureListener(){
+
+      @Override
+      public void onChartGestureStart(MotionEvent motionEvent, ChartTouchListener.ChartGesture chartGesture) {
+
+      }
+
+      @Override
+      public void onChartGestureEnd(MotionEvent motionEvent, ChartTouchListener.ChartGesture chartGesture) {
+
+      }
+
+      @Override
+      public void onChartLongPressed(MotionEvent motionEvent) {
+
+      }
+
+      @Override
+      public void onChartDoubleTapped(MotionEvent motionEvent) {
+
+      }
+
+      @Override
+      public void onChartSingleTapped(MotionEvent motionEvent) {
+
+      }
+
+      @Override
+      public void onChartFling(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
+        EventDispatcher eventDispatcher = reactContext.getNativeModule(UIManagerModule.class).getEventDispatcher();
+        eventDispatcher.dispatchEvent(new ChartGestureEvent(chart.getId(), SystemClock.nanoTime()));
+      }
+
+      @Override
+      public void onChartScale(MotionEvent motionEvent, float v, float v1) {
+
+      }
+
+      @Override
+      public void onChartTranslate(MotionEvent motionEvent, float v, float v1) {
+
+      }
+    });
   }
 
   // {xVals:[],dataSet:[{yVals:[]},{}]}
@@ -116,6 +177,7 @@ public class LineChartManager extends SimpleViewManager<LineChart>{
     if(map.hasKey("enabled")) legend.setEnabled(map.getBoolean("enabled"));
   }
 
+
 //  @ReactProp(name="xAxis")
 //  public void setXAxis(LineChart chart, ReadableMap map){
 //    XAxis xAxis = chart.getXAxis();
@@ -125,4 +187,13 @@ public class LineChartManager extends SimpleViewManager<LineChart>{
 //      case "top": xAxis.setPosition(XAxis.XAxisPosition.TOP); break;
 //    }
 //  }
+
+
+  @Nullable
+  @Override
+  public Map<String, Object> getExportedCustomDirectEventTypeConstants() {
+    return MapBuilder.<String, Object>builder()
+            .put("topChartGesture", MapBuilder.of("registrationName", "onChartGesture"))
+            .build();
+  }
 }
