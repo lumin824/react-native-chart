@@ -9,8 +9,12 @@ const LineChartNative = requireNativeComponent('LineChart');
 
 export default class LineChart extends Component {
   render(){
+    let { style, ...otherProps } = this.props;
+    let backgroundColor = style.backgroundColor || '#fff';
     return (
-      <LineChartNative {...this.props} />
+      <View style={[style,{backgroundColor}]}>
+        <LineChartNative style={{flex:1,backgroundColor}} {...otherProps} />
+      </View>
     );
   }
 }

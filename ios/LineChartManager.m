@@ -75,10 +75,15 @@ RCT_CUSTOM_VIEW_PROPERTY(legend, NSDictionary, LineChartView)
   view.xAxis.drawAxisLineEnabled = false;
   view.xAxis.drawGridLinesEnabled = false;
 
-  view.leftAxis.startAtZeroEnabled = false;
-  view.leftAxis.gridLineDashLengths = [NSArray arrayWithObject:[NSNumber numberWithFloat:2.0f]];
-  view.leftAxis.valueFormatter = [[NSNumberFormatter alloc] init];
-  view.leftAxis.valueFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+  ChartYAxis* leftAxis = view.leftAxis;
+  [leftAxis resetCustomAxisMin];
+  leftAxis.gridLineDashLengths = [NSArray arrayWithObject:[NSNumber numberWithFloat:2.0f]];
+  leftAxis.valueFormatter = [[NSNumberFormatter alloc] init];
+  leftAxis.valueFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+  leftAxis.spaceBottom = 0.1f;
+  leftAxis.spaceTop = 0.1f;
+  leftAxis.granularityEnabled = true;
+  leftAxis.granularity = 1.0f;
 
   view.rightAxis.enabled = false;
 
@@ -89,7 +94,6 @@ RCT_CUSTOM_VIEW_PROPERTY(legend, NSDictionary, LineChartView)
   view.highlightPerDragEnabled = false;
   view.doubleTapToZoomEnabled = false;
   view.pinchZoomEnabled = false;
-  view.backgroundColor = UIColor.redColor;
   view.descriptionText = @"";
 
   return view;

@@ -49,7 +49,11 @@ public class LineChartManager extends SimpleViewManager<LineChart>{
 
     YAxis leftAxis = chart.getAxisLeft();
     leftAxis.resetAxisMinValue();
-    leftAxis.enableGridDashedLine(2.0f, 2.0f, 0);
+    leftAxis.enableGridDashedLine(4.0f, 4.0f, 0);
+    leftAxis.setSpaceBottom(10f);
+    leftAxis.setSpaceTop(10f);
+    leftAxis.setGranularityEnabled(true);
+    leftAxis.setGranularity(1.0f);
 
     YAxis rightAxis = chart.getAxisRight();
     rightAxis.setEnabled(false);
@@ -62,7 +66,6 @@ public class LineChartManager extends SimpleViewManager<LineChart>{
     chart.setHighlightPerDragEnabled(false);
     chart.setDoubleTapToZoomEnabled(false);
     chart.setPinchZoom(false);
-    chart.setBackgroundColor(Color.WHITE);
     chart.setDescription("");
 
 
@@ -159,11 +162,6 @@ public class LineChartManager extends SimpleViewManager<LineChart>{
     }
     chart.setData(data);
     chart.invalidate();
-  }
-
-  @ReactProp(name="backgroundColor")
-  public void setBackgroundColor(LineChart chart, String v){
-    chart.setBackgroundColor(Color.parseColor(v));
   }
 
   @ReactProp(name="description")
