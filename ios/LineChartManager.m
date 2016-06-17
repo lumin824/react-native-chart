@@ -1,6 +1,9 @@
-#import "LineChartManager.h"
-
+#import "RCTViewManager.h"
 #import <Charts/Charts-Swift.h>
+
+@interface LineChartManager : RCTViewManager
+
+@end
 
 @implementation LineChartManager
 

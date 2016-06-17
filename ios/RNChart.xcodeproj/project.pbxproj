@@ -25,7 +25,6 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libRNChart.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNChart.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		6D4943CB1D127E030066CE89 /* LineChartManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineChartManager.h; sourceTree = "<group>"; };
 		6D4943CC1D127E030066CE89 /* LineChartManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineChartManager.m; sourceTree = "<group>"; };
 		6DD28EAE1D12AB5C0012EE1A /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Charts.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -54,7 +53,6 @@
 			isa = PBXGroup;
 			children = (
 				6DD28EAE1D12AB5C0012EE1A /* Charts.framework */,
-				6D4943CB1D127E030066CE89 /* LineChartManager.h */,
 				6D4943CC1D127E030066CE89 /* LineChartManager.m */,
 				134814211AA4EA7D00B7C361 /* Products */,
 			);
