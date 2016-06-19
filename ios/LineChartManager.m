@@ -1,6 +1,8 @@
 #import "RCTViewManager.h"
 #import <Charts/Charts-Swift.h>
 
+#import "RNWarpView.h"
+
 @interface LineChartManager : RCTViewManager
 
 @end
@@ -12,6 +14,7 @@ RCT_EXPORT_MODULE()
 //RCT_EXPORT_VIEW_PROPERTY(backgroundColor, UIColor);
 
 RCT_REMAP_VIEW_PROPERTY(description, descriptionText, NSString);
+RCT_EXPORT_VIEW_PROPERTY(onChartGesture, RCTDirectEventBlock)
 
 RCT_CUSTOM_VIEW_PROPERTY(data, NSDictionary, LineChartView)
 {
@@ -49,7 +52,8 @@ RCT_CUSTOM_VIEW_PROPERTY(data, NSDictionary, LineChartView)
     dataset.drawCircleHoleEnabled = false;
     [data addDataSet:dataset];
   }
-  [view setData:data];
+    LineChartView* chartView = view.subviews[0];
+  [chartView setData:data];
 
 }
 
@@ -65,6 +69,7 @@ RCT_CUSTOM_VIEW_PROPERTY(xAxis, NSDictionary, LineChartView)
 
 RCT_CUSTOM_VIEW_PROPERTY(legend, NSDictionary, LineChartView)
 {
+  LineChartView* chartView = view.subviews[0];
   ChartLegend* legend = view.legend;
   id enabled = json[@"enabled"];
   if(enabled) legend.enabled = [enabled boolValue];
@@ -98,9 +103,10 @@ RCT_CUSTOM_VIEW_PROPERTY(legend, NSDictionary, LineChartView)
   view.doubleTapToZoomEnabled = false;
   view.pinchZoomEnabled = false;
   view.descriptionText = @"";
-
-  return view;
-  //return [[MKMapView alloc] init];
+    
+  return [[RNWarpView alloc]initWithSubview:view];
 }
+
+
 
 @end

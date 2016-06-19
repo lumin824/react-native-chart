@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6D4943CD1D127E030066CE89 /* LineChartManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4943CC1D127E030066CE89 /* LineChartManager.m */; };
+		6D73CA691D1520E400072F62 /* RNWarpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D73CA681D1520E400072F62 /* RNWarpView.m */; };
 		6DD28EAF1D12AB5C0012EE1A /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD28EAE1D12AB5C0012EE1A /* Charts.framework */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +27,8 @@
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libRNChart.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNChart.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D4943CC1D127E030066CE89 /* LineChartManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineChartManager.m; sourceTree = "<group>"; };
+		6D73CA671D1520C300072F62 /* RNWarpView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNWarpView.h; sourceTree = "<group>"; };
+		6D73CA681D1520E400072F62 /* RNWarpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNWarpView.m; sourceTree = "<group>"; };
 		6DD28EAE1D12AB5C0012EE1A /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Charts.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -52,6 +55,8 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
+				6D73CA681D1520E400072F62 /* RNWarpView.m */,
+				6D73CA671D1520C300072F62 /* RNWarpView.h */,
 				6DD28EAE1D12AB5C0012EE1A /* Charts.framework */,
 				6D4943CC1D127E030066CE89 /* LineChartManager.m */,
 				134814211AA4EA7D00B7C361 /* Products */,
@@ -114,6 +119,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D73CA691D1520E400072F62 /* RNWarpView.m in Sources */,
 				6D4943CD1D127E030066CE89 /* LineChartManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
