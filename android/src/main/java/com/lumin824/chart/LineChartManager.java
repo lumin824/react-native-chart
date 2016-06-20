@@ -3,10 +3,12 @@ package com.lumin824.chart;
 import android.graphics.Color;
 import android.view.MotionEvent;
 
+import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.common.MapBuilder;
 import com.facebook.react.common.SystemClock;
 import com.facebook.react.uimanager.UIManagerModule;
@@ -103,9 +105,41 @@ public class LineChartManager extends SimpleViewManager<LineChart>{
       }
 
       @Override
-      public void onChartFling(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
-        EventDispatcher eventDispatcher = reactContext.getNativeModule(UIManagerModule.class).getEventDispatcher();
-        eventDispatcher.dispatchEvent(new ChartGestureEvent(chart.getId(), SystemClock.nanoTime()));
+      public void onChartFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+
+        int verticalMinDistance = 20;
+        String direction = "";
+
+        float moveX = e1.getX() - e2.getX();
+        float moveY = e1.getY() - e2.getY();
+
+        if(Math.abs(moveX) > Math.abs(moveY)){
+          if(Math.abs(moveX) > verticalMinDistance){
+            if(moveX > 0){
+              direction="left";
+            }else{
+              direction="right";
+            }
+          }
+        }else{
+          if(Math.abs(moveY) > verticalMinDistance){
+            if(moveY > 0){
+              direction="up";
+            }else{
+              direction="down";
+            }
+          }
+        }
+
+        if(!direction.isEmpty()){
+          EventDispatcher eventDispatcher = reactContext.getNativeModule(UIManagerModule.class).getEventDispatcher();
+
+          WritableMap event = Arguments.createMap();
+          event.putString("direction", direction);
+
+          eventDispatcher.dispatchEvent(new ChartGestureEvent(chart.getId(), SystemClock.nanoTime(), event));
+        }
+
       }
 
       @Override
