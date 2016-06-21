@@ -175,7 +175,8 @@ public class LineChartManager extends SimpleViewManager<LineChart>{
         entries.add(entry);
       }
 
-      String label = y.getString("label");
+      String label = "";
+      if(y.hasKey("label")) label = y.getString("label");
       LineDataSet dataSet = new LineDataSet(entries,label);
 
       ReadableArray colorsArray = y.getArray("colors");
