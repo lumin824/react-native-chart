@@ -171,7 +171,13 @@ public class LineChartManager extends SimpleViewManager<LineChart>{
 
       ArrayList<Entry> entries = new ArrayList<Entry>();
       for(int j = 0; j < yValArray.size(); j++){
-        Entry entry = new Entry((float)yValArray.getDouble(j),j);
+        float yVal = .0f;
+        switch(yValArray.getType(j)){
+          case String: yVal = Float.valueOf(yValArray.getString(j)); break;
+          case Number: yVal = (float) yValArray.getDouble(j); break;
+        }
+
+        Entry entry = new Entry(yVal,j);
         entries.add(entry);
       }
 
