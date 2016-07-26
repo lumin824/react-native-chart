@@ -227,6 +227,21 @@ public class LineChartManager extends SimpleViewManager<LineChart>{
 //    }
 //  }
 
+  @ReactProp(name="leftAxis")
+  public void setLeftAxis(LineChart chart, ReadableMap map){
+    YAxis leftAxis = chart.getAxisLeft();
+
+    if(map.hasKey("axisMinValue")){
+      float axisMinValue = (float) map.getDouble("axisMinValue");
+      leftAxis.setAxisMinValue(axisMinValue);
+    }
+
+    if(map.hasKey("axisMaxValue")){
+      float axisMaxValue = (float) map.getDouble("axisMaxValue");
+      leftAxis.setAxisMaxValue(axisMaxValue);
+    }
+  }
+
 
   @Nullable
   @Override
