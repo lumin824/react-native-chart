@@ -29,9 +29,10 @@ RCT_CUSTOM_VIEW_PROPERTY(data, NSDictionary, LineChartView)
 
     NSMutableArray<ChartDataEntry*> * entries = [[NSMutableArray alloc] init];
     for(int j = 0; j < yValArray.count; j++){
-
-      double val = [[yValArray objectAtIndex:j] doubleValue];
-      ChartDataEntry* entry = [[ChartDataEntry alloc]initWithValue:val xIndex:j];
+        
+        double val = [yValArray[j][@"val"] doubleValue];
+        int xIdx = [yValArray[j][@"xIndex"] intValue];
+      ChartDataEntry* entry = [[ChartDataEntry alloc]initWithValue:val xIndex:xIdx];
       [entries addObject:entry];
     }
 
@@ -59,12 +60,40 @@ RCT_CUSTOM_VIEW_PROPERTY(data, NSDictionary, LineChartView)
 
 RCT_CUSTOM_VIEW_PROPERTY(xAxis, NSDictionary, LineChartView)
 {
+    LineChartView* chartView = view.subviews[0];
+    
+    if([json objectForKey:@"labelsToSkip"]){
+        int val = [[json valueForKey:@"labelsToSkip"] intValue];
+        [chartView.xAxis setLabelsToSkip:val];
+    }
+    
 //  NSString* position = json[@"position"];
 //  NSArray* positionArray = [NSArray arrayWithObjects:@"bottom",@"top", nil];
 //  switch ([positionArray indexOfObject:position]) {
 //    case 0: view.xAxis.labelPosition = XAxisLabelPositionBottom; break;
 //    case 1: view.xAxis.labelPosition = XAxisLabelPositionTop; break;
 //  }
+}
+
+RCT_CUSTOM_VIEW_PROPERTY(leftAxis, NSDictionary, LineChartView)
+{
+    LineChartView* chartView = view.subviews[0];
+    
+    if([json objectForKey:@"axisMinValue"]){
+        double val = [[json valueForKey:@"axisMinValue"] doubleValue];
+        [chartView.leftAxis setAxisMinValue:val];
+    }
+    
+    if([json objectForKey:@"axisMaxValue"]){
+        double val = [[json valueForKey:@"axisMaxValue"] doubleValue];
+        [chartView.leftAxis setAxisMaxValue:val];
+    }
+    
+    if([json objectForKey:@"labelCount"]){
+        int val = [[json valueForKey:@"labelCount"] intValue];
+        [chartView.leftAxis setLabelCount:val];
+    }
+    
 }
 
 RCT_CUSTOM_VIEW_PROPERTY(legend, NSDictionary, LineChartView)
